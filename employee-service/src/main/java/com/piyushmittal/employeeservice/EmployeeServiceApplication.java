@@ -23,7 +23,7 @@ public class EmployeeServiceApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		List<String> list = new ArrayList<String>();
-		list.add("Play");
+		list.add("Photography");
 		list.add("Singing");
 		
 		
