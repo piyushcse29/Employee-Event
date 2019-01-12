@@ -11,20 +11,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
-
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
+@ApiModel(description="All details about the employee.")
 public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long uuid;
 	
-	@Column(unique = true)
-	@Email
+	//@Column(unique = true)
+	//@Email
 	private String email;
+	
+	@Size(min=3, message="Name should be atleast 3 character")
+	@ApiModelProperty(notes="Name should be atleast 3 character")
 	private String fullName;
+	
+	@ApiModelProperty(notes="Birth date should in the past")
 	private LocalDate birthdate;
 	
 	@Column
@@ -33,7 +41,7 @@ public class Employee {
 	
 	Employee(){}
 	
-	Employee(String email, String fullName, LocalDate birthday, List<String> hobbies){
+	public Employee(String email, String fullName, LocalDate birthday, List<String> hobbies){
 		this.email = email;
 		this.fullName = fullName;
 		this.birthdate = birthday;

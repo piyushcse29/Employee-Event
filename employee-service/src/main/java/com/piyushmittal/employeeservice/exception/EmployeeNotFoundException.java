@@ -1,8 +1,8 @@
-package com.piyushmittal.employeeservice;
+package com.piyushmittal.employeeservice.exception;
 
 public class EmployeeNotFoundException extends RuntimeException {
 
-	EmployeeNotFoundException(Long uuid) {
+	public EmployeeNotFoundException(Long uuid) {
 		super("Could not find employee " + uuid);
 	}
 }

@@ -1,4 +1,4 @@
-package com.piyushmittal.employeeservice;
+package com.piyushmittal.employeeservice.exception;
 
 import java.util.Date;
 
