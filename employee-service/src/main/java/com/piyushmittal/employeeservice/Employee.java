@@ -24,8 +24,8 @@ public class Employee {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long uuid;
 	
-	//@Column(unique = true)
-	//@Email
+	@Column(unique = true, length = 50)
+	@Email
 	private String email;
 	
 	@Size(min=3, message="Name should be atleast 3 character")
