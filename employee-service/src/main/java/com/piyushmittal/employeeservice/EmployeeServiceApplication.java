@@ -24,6 +24,7 @@ public class EmployeeServiceApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		//Dummy Data
 		List<String> hobbylist = new ArrayList<String>();
 		hobbylist.add("Photography");
 		hobbylist.add("Singing");

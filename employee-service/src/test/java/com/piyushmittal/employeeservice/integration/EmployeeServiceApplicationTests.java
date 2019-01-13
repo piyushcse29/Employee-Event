@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -11,12 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class EmployeeServiceApplicationTests {
 
 
 	@Autowired
 	private TestRestTemplate restTemplate;
-
+	
 	@Test
 	public void testGetEmployee() throws Exception {
 		String response = this.restTemplate.getForObject("/employees/1", String.class);
