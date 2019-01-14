@@ -1,8 +1,12 @@
 package com.piyushmittal.employeeservice;
 
+import static  org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +29,18 @@ public class EmployeeController {
 	KafkaTemplate<String, Event> kafkaTemplate;
 	
 	@GetMapping("/employees/{uuid}")
-	Employee getEmployee(@PathVariable Long uuid) {
-		return employeeRepository.findById(uuid).orElseThrow(()-> new EmployeeNotFoundException(uuid));
+	Resource<Employee> getEmployee(@PathVariable Long uuid) {
+		Optional<Employee> employee = employeeRepository.findById(uuid);
+		
+		if(!employee.isPresent())
+		 throw new EmployeeNotFoundException(uuid);
+		
+		Resource<Employee> resource = new Resource<Employee>(employee.get());
+		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getAllEmployee());
+		resource.add(linkTo.withRel("all-employees"));
+	
+		return resource;
+		
 	}
 	
 	@GetMapping("/employees")
